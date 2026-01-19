@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xiaojie</groupId>
-        <artifactId>nft-market</artifactId>
+        <artifactId>school-market</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -30,12 +30,37 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <!--        驱动链接-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.httpcomponents</groupId>-->
+        <!--            <artifactId>httpclient</artifactId>-->
+        <!--            <version>4.3.6</version>-->
+        <!--        </dependency>-->
+
     </dependencies>
-<!--    <dependency>-->
-<!--        <groupId></groupId>-->
-<!--        <artifactId></artifactId>-->
-<!--        <version></version>-->
-<!--    </dependency>-->
 
 
     <dependencyManagement>

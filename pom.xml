@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xiaojie</groupId>
-    <artifactId>nft-market</artifactId>
+    <artifactId>school-market</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>nft-market</name>
+    <name>school-market</name>
     <description>聚合工程</description>
     <packaging>pom</packaging>
 
@@ -21,6 +21,7 @@
         <module>market-auth-server</module>
         <module>market-gateway</module>
         <module>market-third-party</module>
+        <module>market-seckill</module>
     </modules>
 
 </project>

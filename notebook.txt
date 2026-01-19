@@ -1,8 +1,35 @@
 该笔记本将体现整个项目的心路历程，帮助简历的优化：
 **核心思想，什么业务=》需要什么技术=》可以解决什么问题**
+***改成校园二手物品买卖平台：二人转 school-market
+***(普通的物品买卖:gulimall项目)
+***(类onlyfans：校园学习笔记订阅系统，卖者可以选择一些为免费，而另一些为付费，订阅者可以按月订阅或按单订阅（价格由卖家设置），
+    随时可以取消，如果一个卖家半个月没有发布过笔记，可以自动提醒是否取消订阅
+    有评分系统，和举报系统
+    支持word/pdf/多种图片格式/视频)
+------------------------------------------------------------------------------------------------------------------------------
+
 
 1.本项目每个微服务单独配置版本，根项目只负责汇聚，便于后期可能的扩展导致版本更替冲突
 
-2.实体类实现serialize接口，再redis、openfeign、mq是需要转化为字节数组
+2.两种序列化：对外用JSON，对内用字节流！
+    如：redis、openfeign、mq等需要字节流
 
-3.serialVersionUID用于在序列化和反序列化过程中验证类的版本一致性，jvm会对序列化前后的UID
+3.serialVersionUID用于在序列化和反序列化过程中验证类的版本一致性
+
+4.hibernate validator:
+    @Validated({AddGroup.class}) 告诉Spring当前操作场景
+    字段级规则：groups = {AddGroup.class} 定义字段在什么场景下需要校验
+
+5.数据库不使用外键：
+    1）性能 2）微服务，不同服务数据库存放位置可能不一 3）后期不易分库分表
+
+6.- 性能：Dubbo高性能 vs Feign通用性
+  - 序列化：Dubbo二进制 vs Feign JSON
+
+7. paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));优化查询，提升50%
+
+8.使用spring actuator监控spring服务
+
+9.使用Redisson框架进行redis连接，自带分布式锁
+
+
