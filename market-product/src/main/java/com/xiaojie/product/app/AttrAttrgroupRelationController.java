@@ -1,4 +1,4 @@
-package com.xiaojie.product.controller;
+package com.xiaojie.product.app;
 
 
 import com.xiaojie.common.utils.PageUtils;

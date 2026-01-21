@@ -3,6 +3,9 @@ server:
   servlet:
     session:
       timeout: 30m
+
+
+
 school-market:
   thread:
     corePoolSize: 10
@@ -33,5 +36,18 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/gulimall_pms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    连接池
     hikari:
       max-lifetime: 50000
+#模板缓存禁止
+  thymeleaf:
+    cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+  session:
+    store-type: redis

@@ -1,4 +1,4 @@
-package com.xiaojie.product.controller;
+package com.xiaojie.product.app;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

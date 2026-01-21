@@ -1,10 +1,10 @@
-package com.xiaojie.product.controller;
+package com.xiaojie.product.app;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("product/productattrvalue")
-public class ProductAttrValueController {
+@RequestMapping("product/spuinfodesc")
+public class SpuInfoDescController {
 }

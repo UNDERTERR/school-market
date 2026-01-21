@@ -1,12 +1,10 @@
-package com.xiaojie.product.controller;
+package com.xiaojie.product.app;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("product/category")
-public class CategoryController {
-
-    //TODO
+@RequestMapping("product/skusaleattrvalue")
+public class SkuSaleAttrValueController {
 }
