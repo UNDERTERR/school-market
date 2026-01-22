@@ -61,10 +61,8 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         categoryBrandRelationEntity.setCatelogName(category.getName());
         categoryBrandRelationEntity.setCatelogId(category.getCatId());
 
-        this.update(
-                categoryBrandRelationEntity,
-                new UpdateWrapper<CategoryBrandRelationEntity>()
-                        .eq("catelog_id", category.getCatId()));
+        this.update(categoryBrandRelationEntity,
+                new UpdateWrapper<CategoryBrandRelationEntity>().eq("catelog_id", category.getCatId()));
     }
 
     @Override

@@ -27,7 +27,7 @@
 
 7. paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));优化查询，提升50%
 
-8.使用spring actuator监控spring服务
+8.#使用spring actuator监控spring服务
 
 9.重构分布式缓存架构，采用Redisson分布式锁+双重检查机制解决高并发缓存击穿问题，
   通过Spring Cache+Redis实现多级缓存，将商品分类查询响应时间从500ms优化至50ms，数据库查询压力降低80%。
@@ -36,15 +36,17 @@
 
 11.- getLock() - 本地操作，只是创建对象    - tryLock() - 网络操作，向Redis发送SETNX命令
 
+12.#编写完整的单元测试套件，包括业务逻辑测试、边界条件测试、集成测试，测试覆盖率达到85%以上，确保代码质量和系统稳定性。
 
+13.#Spring Cloud Sleuth生成分布式链路追踪信息，通过Zipkin收集和展示调用链路
 
+14.线程池拒绝策略：1. AbortPolicy（默认）// 直接抛出异常// 使用场景：需要明确知道任务被拒绝
+                2. CallerRunsPolicy// 由提交任务的线程执行// 使用场景：需要保证所有任务都被执行
+                3. DiscardPolicy// 静默丢弃任务// 使用场景：允许丢失部分任务
+                4. DiscardOldestPolicy// 丢弃队列中最老的任务// 使用场景：优先执行新任务
 
-
-
-
-
-
-
+15.重构商品SPU保存流程，通过CompletableFuture并行处理和批量操作，将数据库操作次数从18次减少至9次，保存耗时从3秒优化至1秒，性能提升67%；
+实现分层保存策略，核心数据同步保存，扩展数据异步处理，提升系统响应速度。
 
 
 
