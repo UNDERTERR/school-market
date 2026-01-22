@@ -13,9 +13,9 @@
 2.两种序列化：对外用JSON，对内用字节流！
     如：redis、openfeign、mq等需要字节流
 
-3.serialVersionUID用于在序列化和反序列化过程中验证类的版本一致性
+3.#serialVersionUID用于在序列化和反序列化过程中验证类的版本一致性
 
-4.hibernate validator:
+4.#hibernate validator:
     @Validated({AddGroup.class}) 告诉Spring当前操作场景
     字段级规则：groups = {AddGroup.class} 定义字段在什么场景下需要校验
 
@@ -36,7 +36,7 @@
 
 11.- getLock() - 本地操作，只是创建对象    - tryLock() - 网络操作，向Redis发送SETNX命令
 
-12.#编写完整的单元测试套件，包括业务逻辑测试、边界条件测试、集成测试，测试覆盖率达到85%以上，确保代码质量和系统稳定性。
+12.编写完整的单元测试套件，包括业务逻辑测试、边界条件测试、集成测试，测试覆盖率达到85%以上，确保代码质量和系统稳定性。
 
 13.#Spring Cloud Sleuth生成分布式链路追踪信息，通过Zipkin收集和展示调用链路
 
@@ -48,5 +48,5 @@
 15.重构商品SPU保存流程，通过CompletableFuture并行处理和批量操作，将数据库操作次数从18次减少至9次，保存耗时从3秒优化至1秒，性能提升67%；
 实现分层保存策略，核心数据同步保存，扩展数据异步处理，提升系统响应速度。
 
-
+16.#new TypeReference<MemberAddressVo>()用于解决Java泛型类型擦除问题
 

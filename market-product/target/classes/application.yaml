@@ -1,0 +1,78 @@
+server:
+  port: 10001
+  servlet:
+    session:
+      timeout: 30m
+
+logging:
+  level:
+    com.xiaojie.product.dao: error
+
+feign:
+  sentinel:
+    enabled: true
+
+school-market:
+  thread:
+    corePoolSize: 10
+    maxPoolSize: 20
+    keepAliveTime: 300
+
+#暴露所有监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+#      主键自增
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/gulimall_pms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    连接池
+    hikari:
+      max-lifetime: 50000
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+  session:
+    store-type: redis
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    # 文件上传秘钥
+#    alicloud:
+#      access-key: ${ALIBABA_CLOUD_ACCESS_KEY_ID}
+#      secret-key: ${ALIBABA_CLOUD_ACCESS_KEY_SECRET}
+      oss:
+        endpoint: oss-cn-hangzhou.aliyuncs.com
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+
+  zipkin:
+      base-url: http://127.0.0.1:9411
+      sender:
+        type: web
+      discovery-client-enabled: false
+    #采样取值介于 0到1之间，1则表示全部收集
+  sleuth:
+    sampler:
+      probability: 1

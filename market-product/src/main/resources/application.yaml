@@ -40,16 +40,22 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/gulimall_pms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    连接池
+    #    连接池
     hikari:
       max-lifetime: 50000
+
+  application:
+    name: market-product
+
   redis:
     host: 127.0.0.1
     port: 6379
+
   cache:
     type: redis
     redis:
       time-to-live: 3600000
+
   session:
     store-type: redis
 
@@ -57,7 +63,6 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-    # 文件上传秘钥
     alicloud:
       access-key: ${ALIBABA_CLOUD_ACCESS_KEY_ID}
       secret-key: ${ALIBABA_CLOUD_ACCESS_KEY_SECRET}

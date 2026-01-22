@@ -16,13 +16,8 @@ import java.util.List;
 @Mapper
 public interface AttrDao extends BaseMapper<AttrEntity> {
 
-    @Select("<script>" +
-            "SELECT attr_id FROM pms_attr " +
-            "WHERE search_type = 1 " +
-            "AND attr_id IN " +
-            "<foreach collection='attrIds' item='id' separator=',' open='(' close=')'>" +
-            "#{id}" +
-            "</foreach>" +
+    @Select("<script>" + "SELECT attr_id FROM pms_attr WHERE search_type = 1 AND attr_id IN" +
+            "<foreach collection='attrIds' item='id' separator=',' open='(' close=')'>" + "#{id}" + "</foreach>" +
             "</script>")
     List<Long> selectSearchAttrIds(@Param("attrIds") List<Long> attrIds);
 }
