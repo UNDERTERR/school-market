@@ -8,19 +8,21 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.8.RELEASE</version>
         <relativePath/>
-        <!--        relativePath指定父项目POM文件的相对路径：-->
-        <!--        - 默认值: ../pom.xml (上级目录)-->
-        <!--        - 设置空元素: <relativePath/> 表示不从本地查找-->
     </parent>
 
+
+    <groupId>com.xiaojie</groupId>
     <artifactId>market-auth-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>market-auto-server</name>
+    <description>认证中心(社交登录）</description>
+
+
 
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
-
-
     <dependencyManagement>
         <dependencies>
             <dependency>

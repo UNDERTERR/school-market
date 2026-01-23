@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 @Slf4j
-@RestControllerAdvice(basePackages = "io.niceseason.gulimall.product.controller")
+@RestControllerAdvice(basePackages = "com.xiaojie.market.product.controller")
 public class MarketExceptionAdvice {
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})

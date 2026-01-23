@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.alibaba.cloud.seata.GlobalTransactionAutoConfiguration;
 
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.xiaojie.ware.feign")
 @EnableTransactionManagement
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {GlobalTransactionAutoConfigurcation.class})
+//@SpringBootApplication(exclude = {GlobalTransactionAutoConfiguration.class})
+@SpringBootApplication
 public class SchoolMarketWareApplication {
     public static void main(String[] args) {
         SpringApplication.run(SchoolMarketWareApplication.class, args);

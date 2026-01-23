@@ -238,7 +238,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             return SkuESModel;
         }).collect(Collectors.toList());
 
-        //TODO 5、将数据发给es进行保存：gulimall-search
+        //TODO 5、将数据发给es进行保存：market-search
         R r = searchFeignService.saveProductAsIndices(SkuESModels);
         if (r.getCode() == 0) {
             this.baseMapper.upSpuStatus(spuId, ProductConstant.ProductStatusEnum.SPU_UP.getCode());
