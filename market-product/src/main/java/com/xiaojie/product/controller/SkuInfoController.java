@@ -1,4 +1,4 @@
-package com.xiaojie.product.app;
+package com.xiaojie.product.controller;
 
 
 import com.xiaojie.common.utils.PageUtils;
@@ -7,7 +7,6 @@ import com.xiaojie.product.entity.SkuInfoEntity;
 import com.xiaojie.product.service.SkuInfoService;
 import com.xiaojie.product.vo.SkuItemVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;

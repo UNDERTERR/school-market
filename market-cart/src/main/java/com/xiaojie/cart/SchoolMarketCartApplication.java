@@ -1,4 +1,4 @@
-package com.xiaojie.auto;
+package com.xiaojie.cart;
 
 
 import org.springframework.boot.SpringApplication;
@@ -8,14 +8,13 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 
-@EnableRedisHttpSession
+
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.xiaojie.feign")
+@EnableRedisHttpSession
+@EnableFeignClients(basePackages = "com.xiaojie.cart.feign")
 @SpringBootApplication
-public class MarketAuthServerApplication {
-
+public class SchoolMarketCartApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MarketAuthServerApplication.class, args);
+        SpringApplication.run(SchoolMarketCartApplication.class, args);
     }
-
 }

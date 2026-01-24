@@ -1,9 +1,9 @@
-package com.xiaojie.product.app;
+package com.xiaojie.product.controller;
 
 import com.xiaojie.common.utils.PageUtils;
 import com.xiaojie.common.utils.R;
-import com.xiaojie.product.entity.SpuImagesEntity;
-import com.xiaojie.product.service.SpuImagesService;
+import com.xiaojie.product.entity.SpuCommentEntity;
+import com.xiaojie.product.service.SpuCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +11,17 @@ import java.util.Arrays;
 import java.util.Map;
 
 @RestController
-@RequestMapping("product/spuimages")
-public class SpuImagesController {
-
+@RequestMapping("product/spucomment")
+public class SpuCommentController {
     @Autowired
-    private SpuImagesService spuImagesService;
+    private SpuCommentService spuCommentService;
 
     /**
      * 列表
      */
     @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = spuImagesService.queryPage(params);
+        PageUtils page = spuCommentService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -33,17 +32,17 @@ public class SpuImagesController {
      */
     @GetMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-        SpuImagesEntity spuImages = spuImagesService.getById(id);
+        SpuCommentEntity spuComment = spuCommentService.getById(id);
 
-        return R.ok().put("spuImages", spuImages);
+        return R.ok().put("spuComment", spuComment);
     }
 
     /**
      * 保存
      */
     @PostMapping("/save")
-    public R save(@RequestBody SpuImagesEntity spuImages){
-        spuImagesService.save(spuImages);
+    public R save(@RequestBody SpuCommentEntity spuComment){
+        spuCommentService.save(spuComment);
 
         return R.ok();
     }
@@ -52,8 +51,8 @@ public class SpuImagesController {
      * 修改
      */
     @PutMapping("/update")
-    public R update(@RequestBody SpuImagesEntity spuImages){
-        spuImagesService.updateById(spuImages);
+    public R update(@RequestBody SpuCommentEntity spuComment){
+        spuCommentService.updateById(spuComment);
 
         return R.ok();
     }
@@ -63,9 +62,8 @@ public class SpuImagesController {
      */
     @DeleteMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-        spuImagesService.removeByIds(Arrays.asList(ids));
+        spuCommentService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
-
 }

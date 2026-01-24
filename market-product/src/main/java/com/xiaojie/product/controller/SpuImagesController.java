@@ -1,10 +1,9 @@
-package com.xiaojie.product.app;
-
+package com.xiaojie.product.controller;
 
 import com.xiaojie.common.utils.PageUtils;
 import com.xiaojie.common.utils.R;
-import com.xiaojie.product.entity.CommentReplayEntity;
-import com.xiaojie.product.service.CommentReplayService;
+import com.xiaojie.product.entity.SpuImagesEntity;
+import com.xiaojie.product.service.SpuImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,17 +11,18 @@ import java.util.Arrays;
 import java.util.Map;
 
 @RestController
-@RequestMapping("product/commentreplay")
-public class CommentReplayController {
+@RequestMapping("product/spuimages")
+public class SpuImagesController {
+
     @Autowired
-    private CommentReplayService commentReplayService;
+    private SpuImagesService spuImagesService;
 
     /**
      * 列表
      */
     @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = commentReplayService.queryPage(params);
+        PageUtils page = spuImagesService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -33,17 +33,17 @@ public class CommentReplayController {
      */
     @GetMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-        CommentReplayEntity commentReplay = commentReplayService.getById(id);
+        SpuImagesEntity spuImages = spuImagesService.getById(id);
 
-        return R.ok().put("commentReplay", commentReplay);
+        return R.ok().put("spuImages", spuImages);
     }
 
     /**
      * 保存
      */
     @PostMapping("/save")
-    public R save(@RequestBody CommentReplayEntity commentReplay){
-        commentReplayService.save(commentReplay);
+    public R save(@RequestBody SpuImagesEntity spuImages){
+        spuImagesService.save(spuImages);
 
         return R.ok();
     }
@@ -52,8 +52,8 @@ public class CommentReplayController {
      * 修改
      */
     @PutMapping("/update")
-    public R update(@RequestBody CommentReplayEntity commentReplay){
-        commentReplayService.updateById(commentReplay);
+    public R update(@RequestBody SpuImagesEntity spuImages){
+        spuImagesService.updateById(spuImages);
 
         return R.ok();
     }
@@ -63,7 +63,7 @@ public class CommentReplayController {
      */
     @DeleteMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-        commentReplayService.removeByIds(Arrays.asList(ids));
+        spuImagesService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

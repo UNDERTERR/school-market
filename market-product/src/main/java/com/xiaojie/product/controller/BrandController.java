@@ -1,4 +1,4 @@
-package com.xiaojie.product.app;
+package com.xiaojie.product.controller;
 
 
 import com.xiaojie.common.group.AddGroup;
