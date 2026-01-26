@@ -183,7 +183,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         //1、查出当前spuId对应的所有sku信息,品牌的名字
         List<SkuInfoEntity> skuInfoEntities = skuInfoService.getSkusBySpuId(spuId);
 
-        //TODO 4、查出当前sku的所有可以被用来检索的规格属性
+        // 4、查出当前sku的所有可以被用来检索的规格属性
         List<ProductAttrValueEntity> productAttrValueEntities = productAttrValueService
                 .list(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
 
@@ -202,7 +202,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             return attr;
         }).collect(Collectors.toList());
 
-        //TODO 1、发送远程调用，库存系统查询是否有库存
+        // 1、发送远程调用，库存系统查询是否有库存
         Map<Long, Boolean> stockMap = null;
         try {
             List<Long> longList = skuInfoEntities.stream().map(SkuInfoEntity::getSkuId).collect(Collectors.toList());
@@ -222,9 +222,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             BeanUtils.copyProperties(sku, SkuESModel);
             SkuESModel.setSkuPrice(sku.getPrice());
             SkuESModel.setSkuImg(sku.getSkuDefaultImg());
-            //TODO 2、热度评分。
+            // 2、热度评分。
             SkuESModel.setHotScore(0L);
-            //TODO 3、查询品牌和分类的名字信息
+            // 3、查询品牌和分类的名字信息
             BrandEntity brandEntity = brandService.getById(sku.getBrandId());
 
             SkuESModel.setBrandName(brandEntity.getName());
@@ -238,7 +238,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             return SkuESModel;
         }).collect(Collectors.toList());
 
-        //TODO 5、将数据发给es进行保存：market-search
+        // 5、将数据发给es进行保存：market-search
         R r = searchFeignService.saveProductAsIndices(SkuESModels);
         if (r.getCode() == 0) {
             this.baseMapper.upSpuStatus(spuId, ProductConstant.ProductStatusEnum.SPU_UP.getCode());

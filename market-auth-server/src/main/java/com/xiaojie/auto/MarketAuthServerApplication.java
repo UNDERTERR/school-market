@@ -10,7 +10,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 
 @EnableRedisHttpSession
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.xiaojie.feign")
+@EnableFeignClients(basePackages = "com.xiaojie.auto.feign")
 @SpringBootApplication
 public class MarketAuthServerApplication {
 

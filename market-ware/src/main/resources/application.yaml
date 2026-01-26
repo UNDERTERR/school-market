@@ -6,6 +6,8 @@ management:
       exposure:
         include: '*'
 mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:

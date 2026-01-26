@@ -19,7 +19,7 @@ public class SchoolMarketSessionConfiguration {
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setCookieName("MARKETSESSIONID");
-        serializer.setDomainName("xiaojie.com");
+//        serializer.setDomainName("xiaojie.com");
         return serializer;
     }
 }

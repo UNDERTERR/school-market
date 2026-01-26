@@ -32,6 +32,7 @@
       <module name="market-order" options="-parameters" />
       <module name="market-product" options="-parameters" />
       <module name="market-search" options="-parameters" />
+      <module name="market-seckill" options="-parameters" />
       <module name="market-third-party" options="-parameters" />
       <module name="market-ware" options="-parameters" />
     </option>
