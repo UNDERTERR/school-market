@@ -42,7 +42,7 @@ public class OauthController {
     public R authorize(@RequestParam("code") String code, HttpSession session) {
 
         Map<String, String> query = new HashMap<>();
-        //TODO 换了
+        //TODO 换了 weibo api
         query.put("client_id", clientId);
         query.put("client_secret", clientSecret);
         query.put("grant_type", "authorization_code");

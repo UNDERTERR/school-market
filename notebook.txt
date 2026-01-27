@@ -58,3 +58,7 @@
    BCrypt：123456 → $2a$10$【随机盐】+【哈希】（每次盐不同，无法预计算攻击）
             ↑ 即使两个用户密码都是123456，存的内容完全不同
 
+20.RequestContextHolder.setRequestAttributes(requestAttributes);
+   ：CompletableFuture会新开一个线程，在使用feign时需要知道http请求上下文，，所以要提前get请求属性，然后在future中set
+
+21.对比Seata与MQ最终一致性方案，决定基于RabbitMQ实现事件驱动的最终一致性，替代传统的强一致性事务

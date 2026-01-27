@@ -57,7 +57,7 @@ public class CartInterceptor extends HandlerInterceptorAdapter {
         UserInfoTo userInfoTo = threadLocal.get();
         if (!userInfoTo.getTempUser()) {
             Cookie cookie = new Cookie(CartConstant.TEMP_USER_COOKIE_NAME, userInfoTo.getUserKey());
-            cookie.setDomain("gulimall.com");
+//            cookie.setDomain("gulimall.com");
             cookie.setMaxAge(CartConstant.TEMP_USER_COOKIE_TIMEOUT);
             response.addCookie(cookie);
         }

@@ -1,6 +1,6 @@
 package com.xiaojie.search.constant;
 
-public class EsConstant {
-    public static final String PRODUCT_INDEX = "gulimall_product";
+public class ESConstant {
+    public static final String PRODUCT_INDEX = "market_product";
     public static final Integer PRODUCT_PAGESIZE = 1;
 }

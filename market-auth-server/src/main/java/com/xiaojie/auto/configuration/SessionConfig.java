@@ -35,7 +35,7 @@ public class SessionConfig {
         
         // 域名配置 - 根据你的实际域名调整
         // 如果是本地开发，可以注释掉这行
-        // serializer.setDomainName("school-market.com");
+        // serializer.setDomainName("undertree.github.io");
         
         // Cookie路径
         serializer.setCookiePath("/");

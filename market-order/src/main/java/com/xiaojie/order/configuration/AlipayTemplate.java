@@ -9,7 +9,7 @@ public class AlipayTemplate {
 
     public String pay(PayVo  payVo){
 
-
+//TODO alipay api
 
         return null;
     }

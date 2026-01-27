@@ -19,7 +19,7 @@ public class SchoolMarketSessionConfig {
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setCookieName("MARKETSESSIONID");
-//        serializer.setDomainName("xiaojie.com");
+//        serializer.setDomainName("undertree.github.io");
         return serializer;
     }
 }

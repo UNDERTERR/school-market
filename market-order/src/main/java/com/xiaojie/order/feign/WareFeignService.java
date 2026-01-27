@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@FeignClient("gulimall-ware")
+@FeignClient("market-ware")
 public interface WareFeignService {
 
     @RequestMapping("ware/waresku/getSkuHasStocks")

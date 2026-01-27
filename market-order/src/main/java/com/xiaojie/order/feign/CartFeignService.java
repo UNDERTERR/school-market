@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 
-@FeignClient("gulimall-cart")
+@FeignClient("market-cart")
 public interface CartFeignService {
 
     @ResponseBody
