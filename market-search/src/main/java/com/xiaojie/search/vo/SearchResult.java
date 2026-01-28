@@ -1,6 +1,6 @@
 package com.xiaojie.search.vo;
 
-import com.xiaojie.common.to.es.SkuEsModel;
+import com.xiaojie.common.to.es.SkuESModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class SearchResult {
     /**
      * 查询到的所有商品信息
      */
-    private List<SkuEsModel> product;
+    private List<SkuESModel> product;
 
 
     /**
