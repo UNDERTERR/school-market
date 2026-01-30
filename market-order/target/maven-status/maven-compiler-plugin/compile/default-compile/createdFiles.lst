@@ -8,6 +8,7 @@ com\xiaojie\order\service\impl\OrderServiceImpl.class
 com\xiaojie\order\controller\OrderOperateHistoryController.class
 com\xiaojie\order\entity\PaymentInfoEntity.class
 com\xiaojie\order\service\OrderOperateHistoryService.class
+com\xiaojie\order\SchoolMarketOrderApplication.class
 com\xiaojie\order\entity\OrderItemEntity.class
 com\xiaojie\order\to\OrderCreateTo.class
 com\xiaojie\order\vo\OrderItemVo.class

@@ -1,4 +1,5 @@
 com\xiaojie\product\controller\CategoryControllerIntegrationTest.class
 com\xiaojie\product\service\CategoryServiceTest.class
+com\xiaojie\product\util\TestDataGenerator.class
 com\xiaojie\product\config\IntegrationTest.class
 com\xiaojie\product\service\SpuInfoServiceTest.class

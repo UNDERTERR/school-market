@@ -29,7 +29,7 @@ public class TestDataGenerator {
         category.setIcon("http://example.com/icon.png");
         category.setProductUnit("个");
         category.setProductCount(0);
-        category.setDeleted(0);
+        // setDeleted方法不存在，CategoryEntity使用@TableLogic在showStatus字段
         return category;
     }
 
@@ -45,7 +45,7 @@ public class TestDataGenerator {
         brand.setShowStatus(1);
         brand.setFirstLetter("T");
         brand.setSort(random.nextInt(100));
-        brand.setDeleted(0);
+        // BrandEntity没有deleted字段，使用@TableLogic在showStatus字段
         return brand;
     }
 
@@ -56,17 +56,13 @@ public class TestDataGenerator {
         SpuInfoEntity spu = new SpuInfoEntity();
         spu.setId(System.currentTimeMillis());
         spu.setBrandId(1L);
-        spu.setCat1Id(1L);
-        spu.setCat2Id("11");
-        spu.setCat3Id("111");
-        spu.setName("测试商品_" + System.currentTimeMillis());
-        spu.setSubTitle("测试商品副标题");
-        spu.setPrice(new BigDecimal("199.99"));
-        spu.setSale(random.nextInt(1000));
+        spu.setCatalogId(1L);
+        spu.setSpuName("测试SPU_" + System.currentTimeMillis());
+        spu.setSpuDescription("测试SPU描述");
         spu.setPublishStatus(1);
         spu.setCreateTime(new Date());
         spu.setUpdateTime(new Date());
-        spu.setDeleted(0);
+        // SpuInfoEntity没有deleted字段
         return spu;
     }
 

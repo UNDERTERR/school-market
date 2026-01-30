@@ -5,40 +5,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b3005aa-ddd9-453a-9e4e-f7fc8dfacee9" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-auth-server/market-auth-server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-cart/market-cart.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-common/market-common.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-coupon/market-coupon.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-gateway/market-gateway.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-member/market-member.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-order/market-order.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-product/market-product.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-search/market-search.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-seckill/market-seckill.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-third-party/market-third-party.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/market-ware/market-ware.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/database/gulimall_oms.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/database/gulimall_pms.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/database/gulimall_sms.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/database/gulimall_ums.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/database/gulimall_wms.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NFT-market.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-auth-server/src/main/java/com/xiaojie/auth/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/market-auth-server/src/main/java/com/xiaojie/auto/configuration/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-cart/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/market-cart/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-cart/src/main/java/com/xiaojie/cart/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/market-cart/src/main/java/com/xiaojie/cart/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-order/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-order/src/main/java/com/xiaojie/order/configuration/AlipayTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/src/main/java/com/xiaojie/order/configuration/AlipayTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-product/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-ware/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/market-ware/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/market-order/src/main/java/com/xiaojie/order/SchoolMarketOrderApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/market-order/target/classes/com/xiaojie/order/SchoolMarketOrderApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/ValidationMessages.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/AuthServerConstant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/CartConstant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/ProductConstant$AttrEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/ProductConstant$ProductStatusEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/ProductConstant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/WareConstant$PurchaseDetailStatusEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/WareConstant$PurchaseStatusEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constant/WareConstant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constraints/ListValue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/constraints/ListValueConstraintValidator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/exception/BizCodeEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/exception/NoStockException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/exception/RRException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/group/AddGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/group/UpdateGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/MemberPrice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/SkuHasStockVo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/SkuReductionTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/SpuBoundTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/es/SkuESModel$Attr.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/es/SkuESModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/mq/OrderTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/mq/SeckillOrderTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/mq/StockDetailTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/to/mq/StockLockedTo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/Constant$CloudService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/Constant$MenuType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/Constant$ScheduleStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/Constant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/HttpUtils$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/HttpUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/PageUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/Query.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/utils/R.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/vo/MemberResponseVo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/classes/com/xiaojie/common/xss/SQLFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/market-common-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-common/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-order/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-order/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-order/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-product/src/test/java/com/xiaojie/product/util/TestDataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/src/test/java/com/xiaojie/product/util/TestDataGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-product/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +251,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769773253295</updated>
       <workItem from="1769773256033" duration="15000" />
-      <workItem from="1769773282439" duration="6873000" />
+      <workItem from="1769773282439" duration="7940000" />
     </task>
     <servers />
   </component>
