@@ -1,0 +1,5 @@
+com\xiaojie\third\controller\OssController.class
+com\xiaojie\third\config\SwaggerConfig.class
+com\xiaojie\third\SchoolMarketThirdPartyApplication.class
+com\xiaojie\third\controller\SmsSendController.class
+com\xiaojie\third\component\SmsComponent.class

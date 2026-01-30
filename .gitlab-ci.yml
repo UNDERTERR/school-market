@@ -1,0 +1,254 @@
+stages:
+  - validate
+  - test
+  - security
+  - build
+  - package
+  - deploy-test
+  - security-scan
+  - deploy-prod
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+# 代码质量检查
+code-quality:
+  stage: validate
+  image: maven:3.8.1-openjdk-8
+  before_script:
+    - apt-get update -y
+    - apt-get install -y wget unzip
+  script:
+    - mvn validate checkstyle:check pmd:check spotbugs:check
+  artifacts:
+    reports:
+      junit:
+        - target/checkstyle-result.xml
+        - target/pmd.xml
+        - target/spotbugsXml.xml
+    paths:
+      - target/site/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# 单元测试和集成测试
+  unit-tests:
+  stage: test
+  image: maven:3.8.1-openjdk-8
+  services:
+    - name: mysql:8.0
+      alias: mysql
+      command: ["--default-authentication-plugin=mysql_native_password"]
+    - redis:6-alpine
+  variables:
+    MYSQL_ROOT_PASSWORD: root
+    # 创建所有5个数据库
+    MYSQL_DATABASES: "gulimall_pms,gulimall_oms,gulimall_ums,gulimall_wms,gulimall_sms"
+    MYSQL_USER: test
+    MYSQL_PASSWORD: test123
+    # 各服务数据库URL
+    SPRING_PRODUCT_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_pms?useSSL=false&serverTimezone=UTC"
+    SPRING_ORDER_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_oms?useSSL=false&serverTimezone=UTC"
+    SPRING_MEMBER_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_ums?useSSL=false&serverTimezone=UTC"
+    SPRING_WARE_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_wms?useSSL=false&serverTimezone=UTC"
+    SPRING_COUPON_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_sms?useSSL=false&serverTimezone=UTC"
+    SPRING_REDIS_HOST: redis
+  script:
+    - mvn clean test jacoco:report
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+      coverage_report:
+        coverage_format: jacoco
+        path: target/site/jacoco/jacoco.xml
+    paths:
+      - target/site/jacoco/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# 集成测试
+  integration-tests:
+  stage: test
+  image: maven:3.8.1-openjdk-8
+  services:
+    - name: mysql:8.0
+      alias: mysql
+      command: ["--default-authentication-plugin=mysql_native_password"]
+    - redis:6-alpine
+    - elasticsearch:7.9.3
+  variables:
+    MYSQL_ROOT_PASSWORD: root
+    # 创建所有5个数据库
+    MYSQL_DATABASES: "gulimall_pms,gulimall_oms,gulimall_ums,gulimall_wms,gulimall_sms"
+    # 各服务数据库URL
+    SPRING_PRODUCT_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_pms?useSSL=false&serverTimezone=UTC"
+    SPRING_ORDER_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_oms?useSSL=false&serverTimezone=UTC"
+    SPRING_MEMBER_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_ums?useSSL=false&serverTimezone=UTC"
+    SPRING_WARE_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_wms?useSSL=false&serverTimezone=UTC"
+    SPRING_COUPON_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_sms?useSSL=false&serverTimezone=UTC"
+    SPRING_REDIS_HOST: redis
+    ELASTICSEARCH_HOST: elasticsearch
+  script:
+    - mvn failsafe:integration-test failsafe:verify
+  artifacts:
+    reports:
+      junit:
+        - target/failsafe-reports/TEST-*.xml
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+# 依赖安全扫描
+dependency-scan:
+  stage: security
+  image: maven:3.8.1-openjdk-8
+  script:
+    - mvn org.owasp:dependency-check-maven:check
+  artifacts:
+    paths:
+      - target/dependency-check-report.html
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# 代码安全扫描
+sast:
+  stage: security
+  image: owasp/zap2docker-stable
+  script:
+    - mkdir -p /zap/wrk/
+    - /zap/zap-baseline.py -t http://localhost:8080 -J gl-sast-report.json || true
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# 构建应用
+build:
+  stage: build
+  image: maven:3.8.1-openjdk-8
+  script:
+    - mvn clean compile -DskipTests
+  artifacts:
+    paths:
+      - target/
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+
+# 打包应用
+package:
+  stage: package
+  image: maven:3.8.1-openjdk-8
+  script:
+    - mvn package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+      - "*/target/*.jar"
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+# 构建Docker镜像
+build-image:
+  stage: package
+  image: docker:20.10.7
+  services:
+    - docker:20.10.7-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - main
+    - develop
+
+# 部署到测试环境
+deploy-test:
+  stage: deploy-test
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $TEST_SERVER >> ~/.ssh/known_hosts
+  script:
+    - ssh $TEST_USER@$TEST_SERVER "cd /opt/school-market && docker-compose pull && docker-compose up -d --force-recreate"
+  environment:
+    name: test
+    url: http://$TEST_SERVER
+  only:
+    - develop
+
+# 安全扫描生产镜像
+production-scan:
+  stage: security-scan
+  image: aquasec/trivy:latest
+  script:
+    - trivy image --exit-code 0 --severity HIGH,CRITICAL $CI_REGISTRY_IMAGE:latest
+  only:
+    - main
+
+# 部署到生产环境
+deploy-prod:
+  stage: deploy-prod
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $PROD_SERVER >> ~/.ssh/known_hosts
+  script:
+    - ssh $PROD_USER@$PROD_SERVER "cd /opt/school-market && docker-compose pull && docker-compose up -d --force-recreate"
+  environment:
+    name: production
+    url: https://$PROD_SERVER
+  when: manual
+  only:
+    - main
+
+# 性能测试
+performance-test:
+  stage: deploy-test
+  image:
+    name: loadimpact/k6:latest
+    entrypoint: [ "" ]
+  script:
+    - k6 run performance-test.js
+  artifacts:
+    reports:
+      performance: performance-report.json
+  only:
+    - develop
+  allow_failure: true

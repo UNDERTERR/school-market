@@ -1,0 +1,15 @@
+com\xiaojie\auto\configuration\SessionConfig.class
+com\xiaojie\auto\feign\fallback\MemberFallbackService.class
+com\xiaojie\auto\feign\ThirdPartFeignService.class
+com\xiaojie\auto\vo\UserLoginVo.class
+com\xiaojie\auto\configuration\SwaggerConfig.class
+com\xiaojie\auto\SchoolMarketAuthServerApplication.class
+com\xiaojie\auto\controller\AuthController.class
+com\xiaojie\auto\feign\MemberFeignService.class
+com\xiaojie\auto\controller\OauthController$2.class
+com\xiaojie\auto\controller\AuthController$2.class
+com\xiaojie\auto\controller\OauthController.class
+com\xiaojie\auto\controller\AuthController$1.class
+com\xiaojie\auto\vo\SocialUser.class
+com\xiaojie\auto\vo\UserRegisterVo.class
+com\xiaojie\auto\controller\OauthController$1.class

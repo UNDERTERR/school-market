@@ -28,7 +28,7 @@ public class CartController {
      */
     @GetMapping("/list")
     @Operation(summary = "获取购物车列表", description = "获取当前用户的完整购物车信息")
-    public R getCartList() {  // ← 返回统一响应对象 R
+    public R getCart() {  // ← 返回统一响应对象 R
         CartVo cartVo = cartService.getCart();
         return R.ok().setData(cartVo);
     }

@@ -1,0 +1,36 @@
+server:
+  port: 10007
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  application:
+    name: market-third-party
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alicloud:
+      access-key: ${ALIBABA_CLOUD_ACCESS_KEY_ID}
+      secret-key: ${ALIBABA_CLOUD_ACCESS_KEY_SECRET}
+      oss:
+        bucket: school-market-xiaojie
+        endpoint: oss-cn-beijing.aliyuncs.com
+      # 发送短信接口的配置
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+
+

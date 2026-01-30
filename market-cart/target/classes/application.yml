@@ -1,0 +1,38 @@
+server:
+  port: 10003
+
+market:
+  thread:
+    corePoolSize: 10
+    maxPoolSize: 20
+    keepAliveTime: 300
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+  application:
+    name: market-cart
+  redis:
+    host: 127.0.0.1
+    session:
+      store-type: redis
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+

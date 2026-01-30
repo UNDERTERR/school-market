@@ -14,5 +14,15 @@ public class AlipayTemplate {
         return null;
     }
 
+    public String getAlipay_public_key() {
+        return "TODO";
+    }
 
+    public String getCharset() {
+        return "UTF-8";
+    }
+
+    public String getSign_type() {
+        return "RSA2";
+    }
 }

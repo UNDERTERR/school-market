@@ -2,28 +2,19 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/market-auth-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-auth-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-cart/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-cart/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-coupon/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-coupon/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-gateway/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-member/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-member/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-order/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-order/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-product/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-product/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-search/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-search/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-seckill/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-seckill/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-third-party/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-third-party/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/market-ware/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/market-ware/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>

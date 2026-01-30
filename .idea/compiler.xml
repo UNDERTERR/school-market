@@ -8,13 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="market-coupon" />
-        <module name="market-order" />
         <module name="market-gateway" />
+        <module name="market-order" />
         <module name="market-third-party" />
         <module name="market-search" />
-        <module name="market-ware" />
-        <module name="market-cart" />
         <module name="market-auth-server" />
+        <module name="market-cart" />
+        <module name="market-ware" />
         <module name="market-product" />
         <module name="market-seckill" />
         <module name="market-common" />

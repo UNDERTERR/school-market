@@ -1,0 +1,438 @@
+version: '3.8'
+
+services:
+  # MySQL数据库
+  mysql:
+    image: mysql:8.0
+    container_name: school-market-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
+      # 创建所有业务数据库
+      MYSQL_DATABASE: gulimall_pms
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      # 额外创建其他数据库
+      MYSQL_MULTIPLE_DATABASES: gulimall_oms,gulimall_ums,gulimall_wms,gulimall_sms
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+      - ./scripts/database:/docker-entrypoint-initdb.d/sql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - school-market-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Redis缓存
+  redis:
+    image: redis:6-alpine
+    container_name: school-market-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: |
+      sh -c "
+        if [ -n '$${REDIS_PASSWORD}' ]; then
+          redis-server /usr/local/etc/redis/redis.conf --requirepass $${REDIS_PASSWORD}
+        else
+          redis-server /usr/local/etc/redis/redis.conf
+        fi
+      "
+    networks:
+      - school-market-network
+    healthcheck:
+      test: |
+        sh -c "
+          if [ -n '$${REDIS_PASSWORD}' ]; then
+            redis-cli -a $${REDIS_PASSWORD} ping
+          else
+            redis-cli ping
+          fi
+        "
+      timeout: 10s
+      retries: 5
+
+  # Elasticsearch搜索服务
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    container_name: school-market-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-}"
+    ports:
+      - "${ELASTICSEARCH_PORT:-9200}:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - school-market-network
+    healthcheck:
+      test: |
+        sh -c "
+          if [ -n '$${ELASTIC_PASSWORD}' ]; then
+            curl -u elastic:$${ELASTIC_PASSWORD} -f http://localhost:9200/_cluster/health || exit 1
+          else
+            curl -f http://localhost:9200/_cluster/health || exit 1
+          fi
+        "
+      timeout: 10s
+      retries: 10
+
+  # RabbitMQ消息队列
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: school-market-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-/}
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - school-market-network
+    healthcheck:
+      test: |
+        sh -c "
+          if [ -n '$${RABBITMQ_PASSWORD}' ]; then
+            rabbitmq-diagnostics -q ping -u $${RABBITMQ_USER} -p $${RABBITMQ_PASSWORD}
+          else
+            rabbitmq-diagnostics -q ping
+          fi
+        "
+      timeout: 10s
+      retries: 5
+
+  # Nacos注册中心
+  nacos:
+    image: nacos/nacos-server:v2.1.0
+    container_name: school-market-nacos
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_DB_NAME: nacos
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
+      NACOS_AUTH_ENABLE: ${NACOS_AUTH_ENABLE:-false}
+      NACOS_AUTH_TOKEN: ${NACOS_AUTH_TOKEN:-SecretKey012345678901234567890123456789012345678901234567890123456789}
+    ports:
+      - "${NACOS_PORT:-8848}:8848"
+      - "9848:9848"
+    volumes:
+      - nacos_data:/home/nacos/data
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 网关服务
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: school-market-gateway
+    environment:
+      SERVICE_NAME: gateway
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: ${RABBITMQ_USER:-admin}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-}
+    ports:
+      - "${GATEWAY_PORT:-8080}:8080"
+    depends_on:
+      nacos:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    networks:
+      - school-market-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      timeout: 10s
+      retries: 10
+
+  # 商品服务
+  product:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: product
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+    deploy:
+      replicas: 2
+
+  # 订单服务
+  order:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: order
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: ${RABBITMQ_USER:-admin}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 购物车服务
+  cart:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: cart
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 仓储服务
+  ware:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: ware
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: ${RABBITMQ_USER:-admin}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 会员服务
+  member:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: member
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 优惠券服务
+  coupon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: coupon
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 认证服务
+  auth-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: auth-server
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 第三方服务
+  third-party:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: third-party
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+    depends_on:
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 搜索服务
+  search:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: search
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
+      ELASTIC_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD:-}
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+  # 秒杀服务
+  seckill:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVICE_NAME: seckill
+      SPRING_PROFILES_ACTIVE: docker
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+    networks:
+      - school-market-network
+
+volumes:
+  mysql_data:
+  redis_data:
+  elasticsearch_data:
+  rabbitmq_data:
+  nacos_data:
+
+networks:
+  school-market-network:
+    driver: bridge

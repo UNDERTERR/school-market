@@ -1,0 +1,36 @@
+server:
+  port: 10004
+  servlet:
+    session:
+      timeout: 30m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: market-auth-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+  redis:
+    host: 127.0.0.1
+  session:
+    store-type: redis
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+
+
+
