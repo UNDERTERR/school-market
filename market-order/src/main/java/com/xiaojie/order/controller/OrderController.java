@@ -10,6 +10,9 @@ import com.xiaojie.order.vo.OrderConfirmVo;
 import com.xiaojie.order.vo.OrderSubmitVo;
 import com.xiaojie.order.vo.PayVo;
 import com.xiaojie.order.vo.SubmitOrderResponseVo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,22 +22,24 @@ import java.util.Map;
 
 
 
-/**
- * 订单
+ /**
+  * 订单
 
- */
+  */
 @RestController
 @RequestMapping("order/order")
+@Tag(name = "订单管理", description = "订单相关接口")
 public class OrderController {
     @Autowired
     private OrderService orderService;
 
     @Autowired
     AlipayTemplate alipayTemplate;
-    /**
+/**
      * 列表
      */
     @GetMapping("/list")
+    @Operation(summary = "分页查询订单", description = "根据条件分页查询订单列表")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = orderService.queryPage(params);
 
@@ -42,67 +47,74 @@ public class OrderController {
     }
 
 
-    /**
+/**
      * 信息
      */
     @GetMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
+    @Operation(summary = "获取订单详情", description = "根据订单ID获取订单详细信息")
+    public R info(@Parameter(description = "订单ID") @PathVariable("id") Long id){
 		OrderEntity order = orderService.getById(id);
 
         return R.ok().put("order", order);
     }
 
-    @GetMapping("/infoByOrderSn/{OrderSn}")
-    public R infoByOrderSn(@PathVariable("OrderSn") String OrderSn){
+@GetMapping("/infoByOrderSn/{OrderSn}")
+    @Operation(summary = "根据订单号查询订单", description = "根据订单号获取订单详细信息")
+    public R infoByOrderSn(@Parameter(description = "订单号") @PathVariable("OrderSn") String OrderSn){
         OrderEntity order = orderService.getOrderByOrderSn(OrderSn);
 
         return R.ok().put("order", order);
     }
 
-    /**
+/**
      * 保存
      */
     @PostMapping("/save")
-    public R save(@RequestBody OrderEntity order){
+    @Operation(summary = "保存订单", description = "新增订单信息")
+    public R save(@Parameter(description = "订单信息") @RequestBody OrderEntity order){
 		orderService.save(order);
 
         return R.ok();
     }
 
-    /**
+/**
      * 修改
      */
     @PutMapping("/update")
-    public R update(@RequestBody OrderEntity order){
+    @Operation(summary = "更新订单", description = "更新订单信息")
+    public R update(@Parameter(description = "订单信息") @RequestBody OrderEntity order){
 		orderService.updateById(order);
 
         return R.ok();
     }
 
-    /**
+/**
      * 删除
      */
     @DeleteMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
+    @Operation(summary = "删除订单", description = "根据订单ID删除订单信息")
+    public R delete(@Parameter(description = "订单ID数组") @RequestBody Long[] ids){
 		orderService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
 
 
-    /**
+/**
      * 订单确认页面数据
      */
     @RequestMapping("/confirm")
+    @Operation(summary = "订单确认", description = "获取订单确认页面所需的数据")
     public R confirmOrder() {
         OrderConfirmVo confirmVo = orderService.confirmOrder();
         return R.ok().put("confirmOrder", confirmVo);
     }
-    /**
+/**
      * 提交订单
      */
     @RequestMapping("/submit")
-    public R submitOrder(@RequestBody OrderSubmitVo submitVo) {
+    @Operation(summary = "提交订单", description = "用户提交订单信息")
+    public R submitOrder(@Parameter(description = "订单提交信息") @RequestBody OrderSubmitVo submitVo) {
         try {
             SubmitOrderResponseVo responseVo = orderService.submitOrder(submitVo);
             Integer code = responseVo.getCode();
@@ -127,21 +139,23 @@ public class OrderController {
             return R.error("下单失败");
         }
     }
-    /**
+/**
      * 获取当前用户的所有订单
      */
     @RequestMapping("/memberOrders")
-    public R memberOrder(@RequestParam(value = "pageNum", required = false, defaultValue = "0") Integer pageNum) {
+    @Operation(summary = "获取用户订单", description = "获取当前用户的所有订单列表")
+    public R memberOrder(@Parameter(description = "页码") @RequestParam(value = "pageNum", required = false, defaultValue = "0") Integer pageNum) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", pageNum.toString());
         PageUtils page = orderService.getMemberOrderPage(params);
         return R.ok().put("pageUtil", page);
     }
-    /**
+/**
      * 获取支付信息
      */
     @GetMapping("/payInfo/{orderSn}")
-    public R getPayInfo(@PathVariable("orderSn") String orderSn) {
+    @Operation(summary = "获取支付信息", description = "根据订单号获取支付宝支付信息")
+    public R getPayInfo(@Parameter(description = "订单号") @PathVariable("orderSn") String orderSn) {
         try {
             System.out.println("接收到订单信息orderSn："+orderSn);
             PayVo payVo = orderService.getOrderPay(orderSn);

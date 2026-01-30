@@ -4,6 +4,7 @@ server:
     session:
       timeout: 30m
 
+
 logging:
   level:
     com.xiaojie.product.dao: error
@@ -80,6 +81,10 @@ spring:
         type: web
       discovery-client-enabled: false
     #采样取值介于 0到1之间，1则表示全部收集
-  sleuth:
+sleuth:
     sampler:
       probability: 1
+
+# Swagger2配置
+swagger:
+  enabled: true

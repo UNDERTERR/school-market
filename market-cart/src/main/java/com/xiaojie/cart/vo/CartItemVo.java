@@ -1,27 +1,37 @@
 package com.xiaojie.cart.vo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Schema(description = "购物车商品项")
 public class CartItemVo {
 
+@Schema(description = "商品SKU ID", example = "1")
     private Long skuId;
 
+    @Schema(description = "是否选中", example = "true")
     private Boolean check = true;
 
+    @Schema(description = "商品标题", example = "iPhone 15 Pro")
     private String title;
 
+    @Schema(description = "商品图片URL", example = "https://example.com/image.jpg")
     private String image;
 
     /**
      * 商品套餐属性
      */
+    @Schema(description = "商品规格属性列表")
     private List<String> skuAttrValues;
 
+    @Schema(description = "商品单价", example = "99.99")
     private BigDecimal price;
 
+    @Schema(description = "购买数量", example = "2")
     private Integer count;
 
+    @Schema(description = "商品总价", example = "199.98")
     private BigDecimal totalPrice;
 
     public Long getSkuId() {

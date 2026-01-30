@@ -42,3 +42,13 @@ spring:
     sampler:
       probability: 1
 
+# Swagger配置
+springfox:
+  documentation:
+    swagger:
+      v2:
+        enabled: true
+    swagger-ui:
+      enabled: true
+      base-url: /swagger-ui.html
+

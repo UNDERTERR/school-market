@@ -31,7 +31,7 @@ public class AttrController {
         return R.ok().put("data", productAttrValueEntities);
     }
 
-    @PostMapping("/update/{spuId}")
+    @PutMapping("/update/{spuId}")
     public R updateSpuAttrs(@PathVariable("spuId") Long spuId, @RequestBody List<ProductAttrValueEntity> attrValueEntities) {
         attrService.updateSpuAttrs(spuId, attrValueEntities);
         return R.ok();

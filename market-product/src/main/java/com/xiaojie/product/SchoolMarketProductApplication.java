@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableRedisHttpSession
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.xiaojie.product.feign"})
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.xiaojie.product")
 public class SchoolMarketProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(SchoolMarketProductApplication.class, args);

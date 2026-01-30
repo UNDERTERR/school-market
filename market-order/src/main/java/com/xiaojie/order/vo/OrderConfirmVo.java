@@ -1,5 +1,6 @@
 package com.xiaojie.order.vo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,27 +8,33 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+@Schema(description = "订单确认响应数据")
 public class OrderConfirmVo {
 
-    @Getter
+@Getter
     @Setter
     /** 会员收获地址列表 **/
+    @Schema(description = "会员收货地址列表")
     private List<MemberAddressVo> memberAddressVos;
 
-    @Getter @Setter
+@Getter @Setter
     /** 所有选中的购物项 **/
+    @Schema(description = "所有选中的购物项列表")
     private List<OrderItemVo> items;
 
     /** 发票记录 **/
     @Getter @Setter
     /** 优惠券（会员积分） **/
+    @Schema(description = "会员积分")
     private Integer integration;
 
     /** 防止重复提交的令牌 **/
     @Getter @Setter
+    @Schema(description = "防重复提交令牌")
     private String orderToken;
 
     @Getter @Setter
+    @Schema(description = "商品库存状态映射")
     Map<Long,Boolean> stocks;
 
     public Integer getCount() {

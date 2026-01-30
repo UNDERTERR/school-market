@@ -17,8 +17,16 @@
         <module name="market-auth-server" />
         <module name="market-product" />
         <module name="market-seckill" />
-        <module name="market-member" />
         <module name="market-common" />
+      </profile>
+      <profile name="Annotation profile for school-market" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+        </processorPath>
+        <module name="market-member" />
       </profile>
     </annotationProcessing>
   </component>

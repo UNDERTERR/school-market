@@ -62,3 +62,30 @@
    ：CompletableFuture会新开一个线程，在使用feign时需要知道http请求上下文，，所以要提前get请求属性，然后在future中set
 
 21.对比Seata与MQ最终一致性方案，决定基于RabbitMQ实现事件驱动的最终一致性，替代传统的强一致性事务
+
+22.企业级SQL优化策略：
+1. 索引优化
+- 复合索引： 根据查询频率调整字段顺序 (status,create_time)
+- 覆盖索引： 避免回表，提升查询效率
+- 索引失效场景： 函数操作、类型转换、LIKE前缀匹配
+2. 查询重写
+-- 避免：SELECT * 
+-- 推荐：SELECT id,name,status WHERE status=1
+-- 避免：子查询
+-- 推荐：LEFT JOIN
+3. 分库分表
+- 垂直分表： 大字段分离（如content、blob）
+- 水平分表： 按时间、用户ID分片
+- 读写分离： 主从架构，查询走从库
+4. 缓存策略
+- Redis缓存： 热点数据TTL设置
+- 本地缓存： Caffeine/Guava Cache
+- 缓存预热： 系统启动时加载热点数据
+5. 数据库配置
+- 连接池： HikariCP参数调优
+- 慢查询监控： 开启slow_query_log
+- 执行计划分析： EXPLAIN查看cost
+6. 架构层面
+- ES搜索： 复杂查询用Elasticsearch
+- 数据归档： 历史数据迁移
+- 异步处理： MQ解耦复杂查询

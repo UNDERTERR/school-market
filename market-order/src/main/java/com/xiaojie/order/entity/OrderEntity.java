@@ -3,6 +3,7 @@ package com.xiaojie.order.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,37 +17,45 @@ import java.util.List;
  */
 @Data
 @TableName("oms_order")
+@Schema(description = "订单实体")
 public class OrderEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/**
+/**
 	 * id
 	 */
 	@TableId
+	@Schema(description = "订单ID", example = "1")
 	private Long id;
 	/**
 	 * member_id
 	 */
+	@Schema(description = "会员ID", example = "1")
 	private Long memberId;
 	/**
 	 * 订单号
 	 */
+	@Schema(description = "订单号", example = "202401290001")
 	private String orderSn;
 	/**
 	 * 使用的优惠券
 	 */
+	@Schema(description = "优惠券ID", example = "1")
 	private Long couponId;
 	/**
 	 * create_time
 	 */
+	@Schema(description = "创建时间")
 	private Date createTime;
 	/**
 	 * 用户名
 	 */
+	@Schema(description = "会员用户名", example = "testuser")
 	private String memberUsername;
 	/**
 	 * 订单总额
 	 */
+	@Schema(description = "订单总额", example = "99.99")
 	private BigDecimal totalAmount;
 	/**
 	 * 应付总额
