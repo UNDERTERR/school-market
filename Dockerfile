@@ -40,9 +40,9 @@ COPY market-seckill/src ./market-seckill/src
 # 构建应用
 RUN mvn clean package -DskipTests
 
-# 运行阶段 - 使用GitLab Registry或默认镜像
-ARG RUNTIME_IMAGE=openjdk:8-jre-alpine
-FROM ${RUNTIME_IMAGE}
+# 运行阶段 - 需要在FROM之前重新声明ARG
+ARG RUNTIME_IMAGE
+FROM ${RUNTIME_IMAGE:-openjdk:8-jre-alpine}
 
 # 安装必要的工具
 RUN apk add --no-cache tzdata curl bash
