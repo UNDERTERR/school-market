@@ -44,8 +44,8 @@ unit-tests:
     MYSQL_ROOT_PASSWORD: root
     # 创建所有5个数据库
     MYSQL_DATABASES: "gulimall_pms,gulimall_oms,gulimall_ums,gulimall_wms,gulimall_sms"
-    MYSQL_USER: test
-    MYSQL_PASSWORD: test123
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
     # 各服务数据库URL
     SPRING_PRODUCT_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_pms?useSSL=false&serverTimezone=UTC"
     SPRING_ORDER_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_oms?useSSL=false&serverTimezone=UTC"
@@ -55,7 +55,7 @@ unit-tests:
     SPRING_REDIS_HOST: redis
   script:
     - echo "Running unit tests..."
-    - mvn clean test
+    - mvn test
     - echo "Tests completed successfully"
   artifacts:
     reports:
