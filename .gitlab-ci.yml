@@ -180,8 +180,39 @@ build-image:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    # 配置Docker使用国内镜像（可选）
-    - mkdir -p /etc/docker && echo '{"registry-mirrors":["https://docker.mirrors.ustc.edu.cn","https://hub-mirror.c.163.com"]}' > /etc/docker/daemon.json || true
+    # 配置Docker使用国内镜像源
+    - |
+      mkdir -p /etc/docker && cat > /etc/docker/daemon.json << 'EOF'
+      {
+        "registry-mirrors": [
+          "https://docker.registry.cyou",
+          "https://docker-cf.registry.cyou",
+          "https://dockercf.jsdelivr.fyi",
+          "https://docker.jsdelivr.fyi",
+          "https://dockertest.jsdelivr.fyi",
+          "https://mirror.aliyuncs.com",
+          "https://dockerproxy.com",
+          "https://mirror.baidubce.com",
+          "https://docker.m.daocloud.io",
+          "https://docker.nju.edu.cn",
+          "https://docker.mirrors.sjtug.sjtu.edu.cn",
+          "https://docker.mirrors.ustc.edu.cn",
+          "https://mirror.iscas.ac.cn",
+          "https://docker.rainbond.cc",
+          "https://do.nark.eu.org",
+          "https://dc.j8.work",
+          "https://gst6rzl9.mirror.aliyuncs.com",
+          "https://registry.docker-cn.com",
+          "http://hub-mirror.c.163.com",
+          "http://mirrors.ustc.edu.cn",
+          "https://mirrors.tuna.tsinghua.edu.cn",
+          "http://mirrors.sohu.com"
+        ]
+      }
+      EOF
+    - echo "Docker daemon configured with mirrors"
+    # 重启Docker服务使配置生效（如果可能）
+    - docker info 2>/dev/null | grep -i "registry mirror" || echo "Mirror configuration may require Docker restart"
     # 重试拉取基础镜像
     - |
       for i in 1 2 3; do
