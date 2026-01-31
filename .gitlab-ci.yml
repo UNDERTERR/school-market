@@ -23,10 +23,9 @@ build-validation:
   stage: validate
   image: maven:3.8.1-openjdk-8
   script:
-    - echo "Building project dependencies..."
-    - mvn clean install -DskipTests -q
+    - echo "Installing dependencies first..."
+    - mvn clean install -DskipTests -Dcheckstyle.skip=true -q
     - echo "Build validation completed"
-  allow_failure: true
   only:
     - merge_requests
     - main

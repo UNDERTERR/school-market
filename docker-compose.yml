@@ -9,11 +9,15 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
       # 创建所有业务数据库
       MYSQL_DATABASE: gulimall_pms
-      MYSQL_USER: ${MYSQL_USER:-school_market}
+      MYSQL_USER: ${MYSQL_UR:-school_market}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      # 额外创建其他数据库
-      MYSQL_MULTIPLE_DATABASES: gulimall_oms,gulimall_ums,gulimall_wms,gulimall_sms
+      # 定义所有数据库环境变量
+      PMS_DATABASE: gulimall_pms
+      OMS_DATABASE: gulimall_oms
+      UMS_DATABASE: gulimall_ums
+      WMS_DATABASE: gulimall_wms
+      SMS_DATABASE: gulimall_sms
     ports:
       - "${MYSQL_PORT:-3306}:3306"
     volumes:
