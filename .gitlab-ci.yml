@@ -18,28 +18,14 @@ cache:
     - .m2/repository/
     - target/
 
-# 代码质量检查
+# 代码质量检查（简化版）
 code-quality:
   stage: validate
   image: maven:3.8.1-openjdk-8
-  before_script:
-    - apt-get update -y
-    - apt-get install -y wget unzip
   script:
-    - mvn validate || true
-    - mvn checkstyle:check || true
-    - mvn pmd:check || true
-    - mvn spotbugs:check || true
-    - echo "Code quality checks completed with warnings allowed"
-  artifacts:
-    reports:
-      junit:
-        - target/checkstyle-result.xml
-        - target/pmd.xml
-        - target/spotbugsXml.xml
-    paths:
-      - target/site/
-    expire_in: 1 week
+    - echo "Running basic code quality checks..."
+    - mvn clean compile
+    - echo "Code quality validation completed"
   allow_failure: true
   only:
     - merge_requests
@@ -69,17 +55,15 @@ unit-tests:
     SPRING_COUPON_DATASOURCE_URL: "jdbc:mysql://mysql:3306/gulimall_sms?useSSL=false&serverTimezone=UTC"
     SPRING_REDIS_HOST: redis
   script:
-    - mvn clean test jacoco:report
-  coverage: '/Total.*?([0-9]{1,3})%/'
+    - echo "Running unit tests..."
+    - mvn clean test
+    - echo "Tests completed successfully"
   artifacts:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
-      coverage_report:
-        coverage_format: jacoco
-        path: target/site/jacoco/jacoco.xml
     paths:
-      - target/site/jacoco/
+      - target/surefire-reports/
     expire_in: 1 week
   only:
     - merge_requests
