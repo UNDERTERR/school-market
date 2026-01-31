@@ -18,14 +18,14 @@ cache:
     - .m2/repository/
     - target/
 
-# 代码质量检查（简化版）
-code-quality:
+# 基础构建验证
+build-validation:
   stage: validate
   image: maven:3.8.1-openjdk-8
   script:
-    - echo "Running basic code quality checks..."
-    - mvn clean compile
-    - echo "Code quality validation completed"
+    - echo "Building project dependencies..."
+    - mvn clean install -DskipTests -q
+    - echo "Build validation completed"
   allow_failure: true
   only:
     - merge_requests
