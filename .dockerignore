@@ -1,0 +1,70 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+
+# Build
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+*.md
+
+# Scripts (not needed for build)
+scripts/
+
+# Environment files
+.env*
+!.env.example
+
+# Docker
+Dockerfile*
+docker-compose*
+.docker/
+
+# Temp files
+*.tmp
+*.temp
+*.cache
+
+# Test files (if not needed in production image)
+**/src/test/
+**/target/test-classes/
+
+# Checkstyle
+checkstyle.xml
+
+# CI/CD configs that aren't needed in image
+.gitlab-ci.yml
+.github/
+
+# Database migrations (optional, if not needed in image)
+# scripts/database/
+
+# Large files
+*.zip
+*.tar.gz
+*.rar
