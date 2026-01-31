@@ -1,5 +1,6 @@
-# 构建阶段
-FROM maven:3.8.1-openjdk-8 AS builder
+# 构建阶段 - 使用GitLab Registry或默认镜像
+ARG BASE_IMAGE=maven:3.8.1-openjdk-8
+FROM ${BASE_IMAGE} AS builder
 
 WORKDIR /app
 
@@ -39,8 +40,9 @@ COPY market-seckill/src ./market-seckill/src
 # 构建应用
 RUN mvn clean package -DskipTests
 
-# 运行阶段
-FROM openjdk:8-jre-alpine
+# 运行阶段 - 使用GitLab Registry或默认镜像
+ARG RUNTIME_IMAGE=openjdk:8-jre-alpine
+FROM ${RUNTIME_IMAGE}
 
 # 安装必要的工具
 RUN apk add --no-cache tzdata curl bash
