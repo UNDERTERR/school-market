@@ -1,0 +1,61 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Environment variables (contain sensitive data)
+.env
+.env.dev
+.env.prod
+.env.test
+.env.local
+.env.*.local
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Personal/Local files
+notebook.txt
+
+# Temp files
+*.tmp
+*.temp
+*.cache
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Spring Boot
+spring-boot-*.pid
+
+# Test reports
+/test-output/
+/surefire-reports/
+
+# Generated files
+generated/
+generated-sources/

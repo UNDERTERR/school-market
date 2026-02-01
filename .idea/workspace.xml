@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b3005aa-ddd9-453a-9e4e-f7fc8dfacee9" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-auth-server/target/market-auth-server-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-auth-server/target/market-auth-server-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-auth-server/target/market-auth-server-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-auth-server/target/market-auth-server-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-cart/target/market-cart-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-cart/target/market-cart-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-cart/target/market-cart-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-cart/target/market-cart-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-common/target/market-common-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-common/target/market-common-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-coupon/target/market-coupon-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-coupon/target/market-coupon-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-coupon/target/market-coupon-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-coupon/target/market-coupon-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-gateway/target/market-gateway-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-gateway/target/market-gateway-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-gateway/target/market-gateway-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-gateway/target/market-gateway-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-member/target/market-member-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-order/target/market-order-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-product/target/market-product-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-search/target/market-search-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-search/target/market-search-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-search/target/market-search-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-search/target/market-search-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-seckill/target/market-seckill-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-seckill/target/market-seckill-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-seckill/target/market-seckill-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-seckill/target/market-seckill-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-third-party/target/market-third-party-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-third-party/target/market-third-party-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-third-party/target/market-third-party-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-third-party/target/market-third-party-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-ware/target/market-ware-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/market-ware/target/market-ware-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/market-ware/target/market-ware-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/market-ware/target/market-ware-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +228,7 @@
       <workItem from="1769773282439" duration="8781000" />
       <workItem from="1769837626424" duration="18019000" />
       <workItem from="1769920586531" duration="3320000" />
-      <workItem from="1769927847092" duration="1241000" />
+      <workItem from="1769927847092" duration="1890000" />
     </task>
     <servers />
   </component>
